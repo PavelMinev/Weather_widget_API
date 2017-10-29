@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="Simple weather widget">  
+  <meta name="author" content="Minev Pavel">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <title>Paris, Flex-box</title>
+
+  <link href="css/flexboxwidget.css" rel="stylesheet">
+  <script src="js/weather.js"></script>
+</head>
+<body>
+    <div class="widget-bg">
+    	<div class="widget">
+    		<div class="one-day-weather"> 
+                <div class="widget-date">
+                    <span class="widget-date__span">Friday</span>
+                    <p class="widget-date__p">August, 23rd</p>
+                </div>
+
+                <div class="widget-temperature">
+                    <span class="widget-temperature__span">14 °</span>
+                    <p class="widget-temperature__p">Paris, France</p>
+                    <div class="widget-wind">  
+                        <img class="widget-wind__img" src="img/wind.png" alt="wind.png">
+                        <p class="widget-wind__p">14 <span class="widget-wind__span">mph</span></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="search-city">
+                <input class="search-city__input" type="text" placeholder="Type city here...">
+                <img class="search" src="img/search-icon.svg" alt="Search">
+                <div class="error"><span>City should not be empty!</span></div>
+            </div>
+    		
+    		<div class="week-weather__container">
+                <div class="week-weather__button week-weather__button--prev"><img src="img/back.png" alt="back.png"></div>
+                <ul class="week-weather">
+                    <li class="week-weather__item">
+                        <p class="week-weather__item-day">Monday</p>
+                        <div class="week-weather__item-img">
+                            <img src="img/01d.png" alt="01d.png">            
+                        </div>
+                        <p>10 °</p>
+                    </li>
+                    <li class="week-weather__item">
+                        <p class="week-weather__item-day">Tuesday</p>
+                        <div class="week-weather__item-img">
+                            <img src="img/03d.png" alt="03d.png">            
+                        </div>
+                        <p>15 °</p>
+                    </li>
+                    <li class="week-weather__item">
+                        <p class="week-weather__item-day">Wednesday</p>
+                        <div class="week-weather__item-img">
+                            <img src="img/01d.png" alt="01d.png">            
+                        </div>
+                        <p>23 °</p>
+                    </li>
+                    <li class="week-weather__item">
+                        <p class="week-weather__item-day">Thursday</p>
+                        <div class="week-weather__item-img">
+                            <img src="img/11d.png" alt="11d.png">            
+                        </div>
+                        <p>18 °</p>
+                    </li>
+                    <li class="week-weather__item">
+                        <p class="week-weather__item-day">Monday</p>
+                        <div class="week-weather__item-img">
+                            <img src="img/01d.png" alt="01d.png">            
+                        </div>
+                        <p>10 °</p>
+                    </li>
+                    <li class="week-weather__item">
+                        <p class="week-weather__item-day">Tuesday</p>
+                        <div class="week-weather__item-img">
+                            <img src="img/03d.png" alt="03d.png">            
+                        </div>
+                        <p>15 °</p>
+                    </li>
+                    <li class="week-weather__item">
+                        <p class="week-weather__item-day">Wednesday</p>
+                        <div class="week-weather__item-img">
+                            <img src="img/01d.png" alt="01d.png">            
+                        </div>
+                        <p>23 °</p>
+                    </li>
+                    <li class="week-weather__item">
+                        <p class="week-weather__item-day">Thursday</p>
+                        <div class="week-weather__item-img">
+                            <img src="img/11d.png" alt="11d.png">            
+                        </div>
+                        <p>18 °</p>
+                    </li>
+                    <li class="week-weather__item">
+                        <p class="week-weather__item-day">Thursday</p>
+                        <div class="week-weather__item-img">
+                            <img src="img/11d.png" alt="11d.png">            
+                        </div>
+                        <p>18 °</p>
+                    </li>
+                    <li class="week-weather__item">
+                        <p class="week-weather__item-day">Monday</p>
+                        <div class="week-weather__item-img">
+                            <img src="img/01d.png" alt="01d.png">            
+                        </div>
+                        <p>10 °</p>
+                    </li>
+                    <li class="week-weather__item">
+                        <p class="week-weather__item-day">Tuesday</p>
+                        <div class="week-weather__item-img">
+                            <img src="img/03d.png" alt="03d.png">            
+                        </div>
+                        <p>15 °</p>
+                    </li>
+                    <li class="week-weather__item">
+                        <p class="week-weather__item-day">Wednesday</p>
+                        <div class="week-weather__item-img">
+                            <img src="img/01d.png" alt="01d.png">            
+                        </div>
+                        <p>23 °</p>
+                    </li>
+                    <li class="week-weather__item">
+                        <p class="week-weather__item-day">Thursday</p>
+                        <div class="week-weather__item-img">
+                            <img src="img/11d.png" alt="11d.png">            
+                        </div>
+                        <p>18 °</p>
+                    </li>                  
+                </ul>
+                <div class="week-weather__button week-weather__button--next"><img src="img/next.png" alt="next.png"></div>
+            </div>
+    		
+    	</div>
+    </div>
+</body>
+</html>
