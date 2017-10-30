@@ -93,8 +93,12 @@ window.onload = function() {
 		};
 
 		function getWeather(city) {
+			var space = -1;
+			while (city.indexOf(" ",space+1) !== -1) {
+				cityRequest = city.replace(city[space+=1], "%20");
+			};
 			var xhr = new XMLHttpRequest();
-			xhr.open('GET','http://api.openweathermap.org/data/2.5/forecast?q=' + city + '&units=metric&APPID=a4f2eeab71098e8006553f5df1d6f957&cnt=14',true);
+			xhr.open('GET','http://api.openweathermap.org/data/2.5/forecast?q=' + cityRequest + '&units=metric&APPID=a4f2eeab71098e8006553f5df1d6f957&cnt=14',true);
 			xhr.send();
 			xhr.onreadystatechange = function() {
 				if (xhr.readyState != 4) return;
@@ -102,7 +106,7 @@ window.onload = function() {
 				error.style.width = "100%";
 				setTimeout(function(){
 					error.style.width = 0;
-				},1000);			
+				},3000);			
 
 				if (xhr.status != 200) {
 					error.firstChild.innerHTML = "Nothing was found by request \"" + city + "\"";
@@ -128,12 +132,12 @@ window.onload = function() {
 						weekBlock[i].firstElementChild.innerHTML = day[weekDayStr.getDay()];
 						weekBlock[i].children[2].innerHTML = weekTemp + " °";
 						weekBlock[i].children[1].innerHTML = '<img class="widget-wind__img" src="img/' + obj.list[(i + 1)].weather[0].icon + '.png" alt="' + obj.list[(i + 1)].weather[0].description + '">';
+						setInterval(function(){getWeather(city)}, 1000*60*10);
 					};
 				};
 			};
 			error.firstChild.innerHTML = 'Loading...';
 			error.style.width = "100%";
-			setInterval(function(){getWeather(city)}, 1000*60*10);
 		};
 
 		var marginWeek = 0;
