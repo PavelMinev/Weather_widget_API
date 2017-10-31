@@ -27,8 +27,7 @@ body {
   background: -o-radial-gradient(top, circle, #b9bec2, #192b39);
   background: radial-gradient(circle at top, #b9bec2, #192b39);
   padding: 65px 55px 95px 55px;
-  max-width: 690px;
-  max-height: 500px; }
+  max-width: 690px; }
 
 .widget {
   display: -webkit-box;
@@ -253,7 +252,8 @@ body {
     -webkit-align-self: center;
         -ms-flex-item-align: center;
             align-self: center;
-    background: rgba(0, 0, 0, 0.5); }
+    background: rgba(0, 0, 0, 0.5);
+    padding: 10px; }
   .search-city {
     -webkit-align-self: center;
         -ms-flex-item-align: center;
