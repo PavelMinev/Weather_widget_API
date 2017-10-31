@@ -94,6 +94,7 @@ window.onload = function() {
 
 		function getWeather(city) {
 			var space = -1;
+			var cityRequest = city;
 			while (city.indexOf(" ",space+1) !== -1) {
 				cityRequest = city.replace(city[space+=1], "%20");
 			};
