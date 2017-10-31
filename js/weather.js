@@ -49,6 +49,7 @@ window.onload = function() {
 		inputCity.onkeyup = function(e){
 			var city = escapeHtml(inputCity.value);
 			var regFirst = /[A-ZА-Я]/;
+			var cityLength = city.length;
 			if (e.code === "Enter") {
 				if (regCity.exec(city)) {
 					error.style.width = 0;
@@ -60,7 +61,7 @@ window.onload = function() {
 					error.style.width = "100%";
 				};
 			}else{
-				if (city.length === 1) {
+				if (cityLength === 1) {
 					city = city.toLocaleUpperCase();
 					if (regFirst.exec(city)){
 						inputCity.value = city;
@@ -71,10 +72,10 @@ window.onload = function() {
 				}else if (city == "") {
 					error.style.width = 0;
 				}else {
-					if (city[city.length - 2] === "-" || city[city.length - 2] === " ") {
-						var letter = city[city.length - 1];
+					if (city[cityLength - 2] === "-" || city[cityLength - 2] === " ") {
+						var letter = city[cityLength - 1];
 						letter = letter.toLocaleUpperCase();
-						city = city.replace(city[city.length - 1], letter);
+						city = city.replace(city[cityLength - 1], letter);
 						inputCity.value = city;
 					};
 				};
@@ -120,7 +121,8 @@ window.onload = function() {
 					speed = speed.toString();
 					speed = speed.substr(0, speed.indexOf(".") + 2);
 					mainTemp = mainTemp.toString();
-					mainTemp = mainTemp.substr(0, mainTemp.indexOf("."));
+					mainTemp = (mainTemp.indexOf(".") !== -1) ? mainTemp.substr(0,mainTemp.indexOf(".")) : mainTemp;
+					if (mainTemp === "-0") mainTemp = "0";
 					cityBlock.innerHTML = obj.city.name + ", " + obj.city.country;
 					temperatureBlock.innerHTML = mainTemp + " °";
 					windBlock.innerHTML = speed + "<span class=\"widget-wind__span\">mph</span>";
@@ -130,6 +132,7 @@ window.onload = function() {
 						var weekTemp = obj.list[i+1].main.temp;
 						weekTemp = weekTemp.toString();
 						weekTemp = (weekTemp.indexOf(".") !== -1) ? weekTemp.substr(0,weekTemp.indexOf(".")) : weekTemp;
+						if (weekTemp === "-0") weekTemp = "0";
 						weekBlock[i].firstElementChild.innerHTML = day[weekDayStr.getDay()];
 						weekBlock[i].children[2].innerHTML = weekTemp + " °";
 						weekBlock[i].children[1].innerHTML = '<img class="widget-wind__img" src="img/' + obj.list[(i + 1)].weather[0].icon + '.png" alt="' + obj.list[(i + 1)].weather[0].description + '">';
