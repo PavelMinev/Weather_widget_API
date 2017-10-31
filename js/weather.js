@@ -110,7 +110,7 @@ window.onload = function() {
 				},3000);			
 
 				if (xhr.status != 200) {
-					error.firstChild.innerHTML = "Nothing was found by request \"" + city + "\"";
+					error.firstChild.innerHTML = "Error! Plese, try again later.";
 					error.style.width = "100%";
 				} else {
 					// If everything is OK
