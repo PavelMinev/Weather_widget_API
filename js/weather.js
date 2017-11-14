@@ -32,6 +32,8 @@ window.onload = function() {
 		var weekDay = date.getDate();
 		var weekDayStr = "";
 		var dayStr = "";
+		var requestId;
+		var baseUrl = "http://api.openweathermap.org/data/2.5/forecast";
 
 		month = month[date.getMonth()];
 		dayStr = day[date.getDay()];
@@ -42,11 +44,11 @@ window.onload = function() {
 		dayBlock.innerHTML = dayStr;
 		dateBlock.innerHTML = month + ", " + weekDayStr;
 
-		inputCity.onclick = function() {
+		inputCity.addEventListener("click", function() {
 			error.style.width = 0;
-		};
+		});
 
-		inputCity.onkeyup = function(e){
+		inputCity.addEventListener("keyup", function(e){
 			var city = escapeHtml(inputCity.value);
 			var regFirst = /[A-ZА-Я]/;
 			var cityLength = city.length;
@@ -80,9 +82,9 @@ window.onload = function() {
 					};
 				};
 			};
-		};
+		});
 
-		search.onclick = function() {
+		search.addEventListener("click", function() {
 			var city = escapeHtml(inputCity.value);
 			var OK = regCity.exec(city);
 			if (OK) {
@@ -91,16 +93,31 @@ window.onload = function() {
 			} else {
 				error.style.width = "100%";
 			};
+		});
+
+		function getRequestUrl(baseUrl, params) {
+			var url = baseUrl;
+			var paramsArray = [];
+			for (var key in params) {
+				paramsArray.push(key + "=" + params[key]);
+			};
+			return url + "?" + paramsArray.join("&");
 		};
 
 		function getWeather(city) {
 			var space = -1;
 			var cityRequest = city;
-			while (city.indexOf(" ",space+1) !== -1) {
-				cityRequest = city.replace(city[space+=1], "%20");
+			while (city.indexOf(" ", space + 1) !== -1) {
+				cityRequest = city.replace(city[space += 1], "%20");
+			};
+			var params = {
+				q: cityRequest,
+				units: 'metric',
+				APPID: 'a4f2eeab71098e8006553f5df1d6f957',
+				cnt: 14
 			};
 			var xhr = new XMLHttpRequest();
-			xhr.open('GET','http://api.openweathermap.org/data/2.5/forecast?q=' + cityRequest + '&units=metric&APPID=a4f2eeab71098e8006553f5df1d6f957&cnt=14',true);
+			xhr.open('GET', getRequestUrl(baseUrl, params), true);
 			xhr.send();
 			xhr.onreadystatechange = function() {
 				if (xhr.readyState != 4) return;
@@ -108,7 +125,7 @@ window.onload = function() {
 				error.style.width = "100%";
 				setTimeout(function(){
 					error.style.width = 0;
-				},3000);			
+				},3000);		
 
 				if (xhr.status != 200) {
 					error.firstChild.innerHTML = "Error! Plese, try again later.";
@@ -136,7 +153,10 @@ window.onload = function() {
 						weekBlock[i].firstElementChild.innerHTML = day[weekDayStr.getDay()];
 						weekBlock[i].children[2].innerHTML = weekTemp + " °";
 						weekBlock[i].children[1].innerHTML = '<img class="widget-wind__img" src="img/' + obj.list[(i + 1)].weather[0].icon + '.png" alt="' + obj.list[(i + 1)].weather[0].description + '">';
-						setInterval(function(){getWeather(city)}, 1000*60*10);
+						clearInterval(requestId);
+						requestId = setInterval(function(){
+							getWeather(city);
+						}, 1000*60*10);
 					};
 				};
 			};
@@ -151,19 +171,19 @@ window.onload = function() {
 			return (window.innerWidth > 600) ? 25 : 100 / 3;
 		};
 
-		next.onclick = function() {
+		next.addEventListener("click", function() {
 			if (marginWeek < 9) {
 				marginWeek = marginWeek + 1;
 				weekBlock[0].style.marginLeft = "-" + (marginWeek * marginStep()) + "%";
 			};
-		};
+		});
 
-		prev.onclick = function() {
+		prev.addEventListener("click", function() {
 			if (marginWeek > 0) {
 				marginWeek = marginWeek - 1;
 				weekBlock[0].style.marginLeft = "-" + (marginWeek * marginStep()) + "%";
 			};
-		};
+		});
 	})();
 	
 
